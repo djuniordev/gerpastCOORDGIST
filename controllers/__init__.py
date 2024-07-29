@@ -1,1 +1,0 @@
-from .sexo import SexoController

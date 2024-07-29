@@ -1,18 +1,12 @@
-from repositories import SexoRepository
-from services import SexoService
+from repositories.sexo import countSexo
 
-class SexoController():
-    def __init__(self, st):
-        self.st = st
+def mostrarDadosSexo(st, dadosUnidade):
 
-    def hideSexo(self, dadosUnidade):
-        sexoRepository = SexoRepository(dadosUnidade)
-        sexoService = SexoService(sexoRepository)
+    infoSexo = countSexo(dadosUnidade)
 
-        infoSexo = sexoService.execute()
-
-        self.st.header("Sexo:")
-        self.st.write(f"Total: {infoSexo["TotalSexoUnidade"]}")
-        self.st.write(f"Masculino: {infoSexo["TotalMasculino"]}")
-        self.st.write(f"Feminino: {infoSexo["TotalFeminino"]}")
+    st.header("Sexo:")
+    st.write(f"Total: {infoSexo["TotalSexoUnidade"]}")
+    st.write(f"Sequência vazia: {infoSexo["NumeroSequenciaVazia"]}")
+    st.write(f"Masculino: {infoSexo["TotalMasculino"]}")
+    st.write(f"Feminino: {infoSexo["TotalFeminino"]}")
 

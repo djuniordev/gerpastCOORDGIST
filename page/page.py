@@ -1,11 +1,6 @@
 from datetime import datetime
 
-def captureMonth(df):
-    primeira_data = df.loc[0, 'DATA INCLUSÃO']
-    data_obj = datetime.strptime(primeira_data, '%d/%m/%Y %H:%M:%S')
-    mes = data_obj.month
-
-    meses = {
+meses = {
         1: "Janeiro",
         2: "Fevereiro",
         3: "Março",
@@ -19,5 +14,10 @@ def captureMonth(df):
         11: "Novembro",
         12: "Dezembro",
     }
+
+def captureMonth(df):
+    primeira_data = df.loc[0, 'DATA INCLUSÃO']
+    data_obj = datetime.strptime(primeira_data, '%d/%m/%Y %H:%M:%S')
+    mes = data_obj.month
 
     return meses[mes]

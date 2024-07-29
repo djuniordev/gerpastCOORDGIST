@@ -1,5 +1,4 @@
 colunasOcultas = [
-    "SEQUÊNCIA",
     "STATUS",
     "DATA INCLUSÃO",
     "ÚLTIMA ATUALIZAÇÃO",
