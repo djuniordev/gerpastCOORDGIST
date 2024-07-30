@@ -8,9 +8,10 @@ def countVeiculo(dadosUnidade: DataFrame):
 
     totalCarro = (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Carro").sum()
     totalBicicleta = (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Bicicleta").sum()
-    totalCaminhao = (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Caminhao").sum()
+    totalCaminhao = (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Caminhão").sum()
     totalCaminhonete = (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Caminhonete").sum()
     totalMotocicleta = (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Motocicleta").sum()
+    totalCarroPasseio = (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Carro de Passeio").sum()
 
     infoVeiculo = {
         "TotalVeiculoUnidade": totalVeiculoUnidade,
@@ -19,7 +20,8 @@ def countVeiculo(dadosUnidade: DataFrame):
         "TotalBicicleta": totalBicicleta,
         "TotalCaminhao": totalCaminhao,
         "TotalCaminhonete": totalCaminhonete,
-        "TotalMotocicleta": totalMotocicleta
+        "TotalMotocicleta": totalMotocicleta,
+        "TotalCarroPasseio": totalCarroPasseio
     }
 
     return infoVeiculo

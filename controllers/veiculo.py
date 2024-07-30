@@ -12,3 +12,4 @@ def mostrarDadosVeiculo(st, dadosUnidade):
         st.write(f"Caminhão: {infoVeiculo["TotalCaminhao"]}")
         st.write(f"Caminhonete: {infoVeiculo["TotalCaminhonete"]}")
         st.write(f"Motocicleta: {infoVeiculo["TotalMotocicleta"]}")
+        st.write(f"Carro de Passeio: {infoVeiculo["TotalCarroPasseio"]}")

@@ -1,16 +1,14 @@
 import pandas as pd
 from datetime import datetime
-from .columns import colunasOcultas, colunasRenomeadas
+from .columns import colunasDesejadas, colunasRenomeadas
 def configDataframe(df):
-    df = df.drop(columns=colunasOcultas)
     df = df.rename(columns=colunasRenomeadas)
 
     # Excluir linhas onde a coluna "B" está vazia
     df = df.dropna(subset=['UNIDADE'])
 
     df['DATA DO ACIDENTE'] = pd.to_datetime(df['DATA DO ACIDENTE'], dayfirst=True)
-    df = df[df['DATA DO ACIDENTE'].dt.year == 2024]
-    df['DATA DO ACIDENTE'] = df['DATA DO ACIDENTE'].dt.strftime('%d/%m/%Y')
+    #df['DATA DO ACIDENTE'] = df['DATA DO ACIDENTE'].dt.strftime('%d/%m/%Y')
 
     listaCategorias = [
         "Menos de 10",
@@ -58,5 +56,6 @@ def configDataframe(df):
     # Calcula a idade e categoriza para cada linha
     df['IDADE'] = df['DATA NASCIMENTO'].apply(calcular_idade)
     df['CATEGORIA IDADE'] = df['IDADE'].apply(categorizar_idade)
+    df = df[colunasDesejadas]
 
     return df

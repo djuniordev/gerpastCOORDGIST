@@ -1,27 +1,14 @@
-colunasOcultas = [
-    "STATUS",
-    "DATA INCLUSÃO",
-    "ÚLTIMA ATUALIZAÇÃO",
-    "ENVIADO PARA ROTA",
-    "ROTA",
-    "ÚLTIMO ACESSO_1",
-    "CRIADO POR_2",
-    "NOME PACIENTE_5",
-    "CPF_7",
-    "CARTÃO SUS_8",
-    "MUNICÍPIO RESIDÊNCIA_10",
-    "ENDEREÇO_11",
-    "TELEFONE CONTATO_12",
-    "OBSERVAÇÃO_13",
-    "BAIRRO DO ACIDENTE_6",
-    "MEMBROS AFETADOS_7",
-    "LADO DO CORPO_8",
-    "LOGIN_INCLUSAO",
-    "DATA_INCLUSAO",
-    "LOGIN_ULTIMA_ATUALIZACAO",
-    "DATA_ULTIMA_ATUALIZACAO",
-    "TIPO ACIDENTE_4"
-]
+colunasDesejadas = [
+                "SEQUÊNCIA",
+                "UNIDADE",
+                "SEXO",
+                "DATA DO ACIDENTE",
+                "HORA DO ACIDENTE",
+                "VEÍCULOS ENVOLVIDOS",
+                "MUNICÍPIO ACIDENTE",
+                "IDADE",
+                "CATEGORIA IDADE"
+            ]
 
 colunasRenomeadas = {
     "UNIDADE_3": "UNIDADE",
