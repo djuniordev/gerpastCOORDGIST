@@ -1,6 +1,7 @@
 from datetime import datetime
 
 meses = {
+        0: "Todos",
         1: "Janeiro",
         2: "Fevereiro",
         3: "Março",
