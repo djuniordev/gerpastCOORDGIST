@@ -59,7 +59,7 @@ def homePage():
             mostrarDadosVeiculo(st, dadosUnidade)
 
             # Mostrar dados de idade
-            #mostrarDadosIdade(st, dadosUnidade)
+            mostrarDadosIdade(st, dadosUnidade)
 
             # Mostrar dados município
             mostrarDadosMunicipio(st, dadosUnidade)
