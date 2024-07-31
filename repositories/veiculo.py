@@ -6,13 +6,11 @@ def countVeiculo(dadosUnidade: DataFrame):
 
     numerosSequenciaVazia = dadosUnidade.loc[indicesVazios, "SEQUÊNCIA"]
 
-    totalCarro = (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Carro").sum()
+    totalCarro = ((dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Carro") | (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Carro de Passeio")).sum()
     totalBicicleta = (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Bicicleta").sum()
     totalCaminhao = (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Caminhão").sum()
     totalCaminhonete = (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Caminhonete").sum()
     totalMotocicleta = (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Motocicleta").sum()
-    totalCarroPasseio = (dadosUnidade["VEÍCULOS ENVOLVIDOS"] == "Carro de Passeio").sum()
-
     infoVeiculo = {
         "TotalVeiculoUnidade": totalVeiculoUnidade,
         "NumeroSequenciaVazia": numerosSequenciaVazia.tolist(),
@@ -21,7 +19,6 @@ def countVeiculo(dadosUnidade: DataFrame):
         "TotalCaminhao": totalCaminhao,
         "TotalCaminhonete": totalCaminhonete,
         "TotalMotocicleta": totalMotocicleta,
-        "TotalCarroPasseio": totalCarroPasseio
     }
 
     return infoVeiculo
