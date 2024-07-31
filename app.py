@@ -1,7 +1,7 @@
-from page import initializePage
+from page.home import homePage
 def main():
 
-    initializePage()
+    homePage()
     #Jessica*30
 if __name__ == "__main__":
     main()

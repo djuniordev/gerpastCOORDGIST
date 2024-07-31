@@ -8,19 +8,12 @@ def configDataframe(df):
     df = df.dropna(subset=['UNIDADE'])
 
     df['DATA DO ACIDENTE'] = pd.to_datetime(df['DATA DO ACIDENTE'], dayfirst=True)
+
+    df['HORA DO ACIDENTE'] = df['HORA DO ACIDENTE'].str.replace(' H', '', regex=False)
+    df['HORA DO ACIDENTE'] = pd.to_datetime(df['HORA DO ACIDENTE'], format='%H:%M').dt.time
     #df['DATA DO ACIDENTE'] = df['DATA DO ACIDENTE'].dt.strftime('%d/%m/%Y')
 
-    listaCategorias = [
-        "Menos de 10",
-        "10 a 19",
-        "20 a 29",
-        "30 a 39",
-        "40 a 49",
-        "50 a 59",
-        "60 a 69",
-        "70 a 79",
-        "80 ou mais"
-    ]
+    df["VEÍCULOS ENVOLVIDOS"] = df["VEÍCULOS ENVOLVIDOS"].str.replace('Carro de Passeio', 'Carro')
 
     def calcular_idade(data_nascimento):
         data = datetime.strptime(data_nascimento, "%d/%m/%Y")
