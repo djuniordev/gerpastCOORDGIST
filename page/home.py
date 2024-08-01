@@ -7,7 +7,6 @@ from controllers.sexo import mostrarDadosSexo
 from controllers.idade import mostrarDadosIdade
 from controllers.municipio import mostrarDadosMunicipio
 from filterpage.filterHomepage import filterDataframe
-from datetime import datetime
 
 def homePage():
 
@@ -53,13 +52,17 @@ def homePage():
 
             # Mostrar dados totais de Sexo
 
-            mostrarDadosSexo(st, dadosUnidade)
+            with st.expander("Mostrar dados de sexo"):
+                mostrarDadosSexo(st, dadosUnidade)
 
             # Mostrar dados veículo
-            mostrarDadosVeiculo(st, dadosUnidade)
+            with st.expander("Mostrar dados de veículo"):
+                mostrarDadosVeiculo(st, dadosUnidade)
 
             # Mostrar dados de idade
-            mostrarDadosIdade(st, dadosUnidade)
+            with st.expander("Mostrar dados de idade"):
+                mostrarDadosIdade(st, dadosUnidade)
 
             # Mostrar dados município
-            mostrarDadosMunicipio(st, dadosUnidade)
+            with st.expander("Mostrar dados de município"):
+                mostrarDadosMunicipio(st, dadosUnidade)
