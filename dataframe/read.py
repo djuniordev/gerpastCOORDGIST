@@ -6,6 +6,7 @@ from controllers.sexo import mostrarDadosSexo
 from controllers.idade import mostrarDadosIdade
 from controllers.municipio import mostrarDadosMunicipio
 from controllers.internacao import mostrarDadosInternacao
+from controllers.semana import mostrarDadosSemana
 from controllers.mes import mostrarDadosMes
 from filterpage.filterHomepage import filterDataframeAcidentes, filterDataframeTratamento
 import streamlit as st
@@ -76,6 +77,8 @@ def mostrarDadosAcidente(df):
     # Mostrar dados município
     #with st.expander("Mostrar dados de município"):
     #mostrarDadosMunicipio(st, dadosUnidade)
+
+    mostrarDadosSemana(st, dadosUnidade)
 
 def mostrarDadosTratamento(df):
     # Pegando os filtros selecionados pelo usuário
