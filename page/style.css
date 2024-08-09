@@ -1,0 +1,14 @@
+:root {
+    --sidebar-color: #184365;
+    --app-background-color: #2E3356
+
+}
+
+div[data-testid="stMetric"]{
+    align: center;
+    border: 1px solid #262730;
+    padding: 20px 20px 20px 70px;
+    padding: 5% 5% 5% 10%;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    color: #FFFFFF;
+}

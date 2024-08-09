@@ -1,8 +1,103 @@
 import pandas as pd
-from .dataframe import configDataframe
-def read(planilha):
+from .dataframe import configDataframeAcidentes, configDataframeTratamento
+from dataframe import meses
+from controllers.veiculo import mostrarDadosVeiculo
+from controllers.sexo import mostrarDadosSexo
+from controllers.idade import mostrarDadosIdade
+from controllers.municipio import mostrarDadosMunicipio
+from controllers.internacao import mostrarDadosInternacao
+from controllers.semana import mostrarDadosSemana
+from controllers.mes import mostrarDadosMes
+from filterpage.filterHomepage import filterDataframeAcidentes, filterDataframeTratamento
+import streamlit as st
+def read(planilha, tipo):
 
     df = pd.read_excel(planilha)
-    df = configDataframe(df)
+
+    if tipo == "Acidentes":
+        df = configDataframeAcidentes(df)
+    if tipo == "Tratamento":
+        df = configDataframeTratamento(df)
 
     return df
+
+def mostrarDadosAcidente(df):
+    # Pegando os filtros selecionados pelo usuário
+
+    dadosUnidade = filterDataframeAcidentes(df, meses)
+
+    # Colocar a tabela em um expander
+    #with st.expander("Mostrar tabela de acidentes"):
+        # Mostrar a tabela
+        #st.dataframe(dadosUnidade, use_container_width=True, hide_index=True)
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric(label="Total de Acidentes", value=dadosUnidade["UNIDADE"].count())
+
+    with col2:
+        sexo_counts = dadosUnidade["SEXO"].value_counts()
+
+        # Determinar o sexo com o maior número de acidentes
+        sexo_max = sexo_counts.idxmax()
+
+        st.metric(label="Sexo c/ mais acidentes", value=f"{sexo_max}")
+
+    with col3:
+        veículo_counts = dadosUnidade["VEÍCULOS ENVOLVIDOS"].value_counts()
+
+        # Determinar o sexo com o maior número de acidentes
+        veiculo_max = veículo_counts.idxmax()
+        st.metric(label="Veículo c/ mais acidentes", value=veiculo_max)
+
+    #with col4:
+        #st.metric(label="Total Municípios", value=dadosUnidade["MUNICÍPIO ACIDENTE"].count())
+    mostrarDadosMes(st, dadosUnidade)
+    col6, col7, col8 = st.columns(3)
+    # Mostrar dados totais de Sexo
+
+    with col6:
+        mostrarDadosIdade(st, dadosUnidade)
+
+    with col7:
+        # Mostrar dados veículo
+    #with st.expander("Mostrar dados de veículo"):
+        mostrarDadosVeiculo(st, dadosUnidade)
+    with col8:
+        mostrarDadosSexo(st, dadosUnidade)
+
+    #with col6:
+    #with st.expander("Mostrar dados de sexo"):
+        #mostrarDadosSexo(st, dadosUnidade)
+
+    # Mostrar dados de idade
+    #with st.expander("Mostrar dados de idade"):
+    #mostrarDadosIdade(st, dadosUnidade)
+
+    # Mostrar dados município
+    #with st.expander("Mostrar dados de município"):
+    #mostrarDadosMunicipio(st, dadosUnidade)
+
+    mostrarDadosSemana(st, dadosUnidade)
+
+def mostrarDadosTratamento(df):
+    # Pegando os filtros selecionados pelo usuário
+
+    dadosUnidade = filterDataframeTratamento(df, meses)
+
+    # Colocar a tabela em um expander
+    with st.expander("Mostrar tabela de tratamento"):
+        # Mostrar a tabela
+        st.dataframe(dadosUnidade, use_container_width=True, hide_index=True)
+
+    # Mostrar dados totais de Sexo
+
+    with st.expander("Mostrar dados de sexo"):
+        mostrarDadosSexo(st, dadosUnidade)
+
+    # Mostrar dados de idade
+    with st.expander("Mostrar dados de idade"):
+        mostrarDadosIdade(st, dadosUnidade)
+
+    with st.expander("Mostrar dados de internação"):
+        mostrarDadosInternacao(st, dadosUnidade)
