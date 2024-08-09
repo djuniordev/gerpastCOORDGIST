@@ -4,6 +4,11 @@ def mostrarDadosSemana(st, dadosUnidade):
 
     dadosUnidade = dadosUnidade.dropna(subset=['DATA DO ACIDENTE']).copy()
     dadosUnidade['Dia'] = dadosUnidade["DATA DO ACIDENTE"].dt.day
+    dadosUnidade['Mês'] = dadosUnidade['DATA DO ACIDENTE'].dt.month
+    dadosUnidade['Ano'] = dadosUnidade['DATA DO ACIDENTE'].dt.year
+
+    mes_counts = dadosUnidade['Mês'].value_counts().reset_index().astype(int)
+    ano_counts = dadosUnidade['Ano'].value_counts().reset_index().astype(int)
 
     dadosUnidade['Dia da Semana'] = dadosUnidade['DATA DO ACIDENTE'].dt.day_name()
 
@@ -12,12 +17,24 @@ def mostrarDadosSemana(st, dadosUnidade):
     # Extrai o nome do dia da semana
     dia_counts.columns = ['Dia', 'Total']
 
-    fig = px.bar(dia_counts, x='Dia', y='Total',
-                 color='Dia', orientation="v",
+    fig = px.bar(dia_counts, x='Dia', y='Total', orientation="v",
                  title='Distribuição por Dia da Semana')
     # Mostrar o gráfico no Streamlit
     st.plotly_chart(fig, use_container_width=True)
+    dia_mais_acidentes = dia_counts.loc[dia_counts['Total'].idxmax(), 'Dia']
+    mais_acidentes = dia_counts['Total'].max()
+    if int(dia_mais_acidentes) < 10:
+        dia_mais_acidentes = "0"+str(dia_mais_acidentes)
 
+    for item in mes_counts["Mês"]:
+        if item < 10:
+            mes = "0"+str(item)
+
+    # Calcular o ano com mais acidentes
+    ano_counts.columns = ['Ano', 'Total']
+    ano_mais_acidentes = ano_counts.loc[ano_counts['Total'].idxmax(), 'Ano']
+
+    st.write(f"OBS: o(s) dia(s) que mais ocorreu acidente(s) foi no dia {dia_mais_acidentes}/{mes}/{ano_mais_acidentes} com {mais_acidentes} acidente(s)")
 
     # Dicionário para tradução dos dias da semana
     diasDaSemana = {
