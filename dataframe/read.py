@@ -8,6 +8,8 @@ from controllers.municipio import mostrarDadosMunicipio
 from controllers.internacao import mostrarDadosInternacao
 from controllers.semana import mostrarDadosSemana
 from controllers.mes import mostrarDadosMes
+from controllers.hora import mostrarDadosHora
+
 from filterpage.filterHomepage import filterDataframeAcidentes, filterDataframeTratamento
 import streamlit as st
 def read(planilha, tipo):
@@ -79,6 +81,7 @@ def mostrarDadosAcidente(df):
     #mostrarDadosMunicipio(st, dadosUnidade)
 
     mostrarDadosSemana(st, dadosUnidade)
+    mostrarDadosHora(st, dadosUnidade)
 
 def mostrarDadosTratamento(df):
     # Pegando os filtros selecionados pelo usuário

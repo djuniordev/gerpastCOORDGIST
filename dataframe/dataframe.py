@@ -10,7 +10,7 @@ def configDataframeAcidentes(df):
     df['DATA DO ACIDENTE'] = pd.to_datetime(df['DATA DO ACIDENTE'], dayfirst=True)
 
     df['HORA DO ACIDENTE'] = df['HORA DO ACIDENTE'].str.replace(' H', '', regex=False)
-    df['HORA DO ACIDENTE'] = pd.to_datetime(df['HORA DO ACIDENTE'], format='%H:%M').dt.time
+    df['HORA DO ACIDENTE'] = pd.to_timedelta(df['HORA DO ACIDENTE']+':00')
     #df['DATA DO ACIDENTE'] = df['DATA DO ACIDENTE'].dt.strftime('%d/%m/%Y')
 
     df["VEÍCULOS ENVOLVIDOS"] = df["VEÍCULOS ENVOLVIDOS"].str.replace('Veículo de Passeio', 'Carro')
