@@ -1,4 +1,5 @@
 import pandas as pd
+import plotly.express as px
 
 def mostrarDadosHora(st, dadosUnidade):
 
@@ -22,15 +23,28 @@ def mostrarDadosHora(st, dadosUnidade):
             return 'Noite'
         elif madrugada_inicio <= timedelta <= madrugada_fim:
             return 'Madrugada'
-        else:
-            return 'Fora do Período'
 
     dadosUnidade["TURNO"] = dadosUnidade["HORA DO ACIDENTE"].apply(definir_turno)
     # Converter timedelta para string no formato HH:MM
     dadosUnidade['HORA DO ACIDENTE'] = dadosUnidade['HORA DO ACIDENTE'].astype(str).str[7:16]
-    print(dadosUnidade[["HORA DO ACIDENTE", "TURNO"]])
+    #print(dadosUnidade[["HORA DO ACIDENTE", "TURNO"]])
     # Caminho para o arquivo Excel que será criado
-    caminho_arquivo = 'dados_unidade.xlsx'
+    #caminho_arquivo = 'dados_unidade.xlsx'
+    hora_counts = dadosUnidade["TURNO"].value_counts().reset_index()
+    hora_counts.columns = ['TURNO', 'Total']
 
+    listaTurnos = [
+        'Manhã',
+        'Tarde',
+        'Noite',
+        'Madrugada'    ]
+
+    # Criar gráfico com plotly
+    fig = px.bar(hora_counts, x='Total', y='TURNO', orientation="h",
+                 color='TURNO',
+                 category_orders={'TURNO': listaTurnos},
+                 title='Distribuição por Turno')
+    # Mostrar o gráfico no Streamlit
+    st.plotly_chart(fig, use_container_width=True)
     # Salvando o DataFrame em uma planilha Excel
-    dadosUnidade.to_excel(caminho_arquivo, index=False, engine='openpyxl')
+    #dadosUnidade.to_excel(caminho_arquivo, index=False, engine='openpyxl')
