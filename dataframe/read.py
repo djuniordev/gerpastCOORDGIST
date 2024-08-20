@@ -3,8 +3,8 @@ from .dataframe import configDataframeAcidentes, configDataframeTratamento
 from dataframe import meses
 from controllers.veiculo import mostrarDadosVeiculo,dadosDetalhadosVeiculos
 from controllers.sexo import mostrarDadosSexo,sexoDetalhado
-from controllers.idade import mostrarDadosIdade
-from controllers.municipio import mostrarDadosMunicipio
+from controllers.idade import mostrarDadosIdade,dadosIdadeDetalhados
+from controllers.municipio import mostrarDadosMunicipio, dadosDetalhadosMunicipio
 from controllers.internacao import mostrarDadosInternacao
 from controllers.semana import mostrarDadosSemana
 from controllers.mes import mostrarDadosMes
@@ -56,6 +56,8 @@ def mostrarDadosAcidente(df):
         st.dataframe(dadosUnidade, use_container_width=True, hide_index=True)
         sexoDetalhado(st, dadosUnidade)
         dadosDetalhadosVeiculos(st, dadosUnidade)
+        dadosIdadeDetalhados(st, dadosUnidade)
+        dadosDetalhadosMunicipio(st, dadosUnidade)
     #with col4:
         #st.metric(label="Total Municípios", value=dadosUnidade["MUNICÍPIO ACIDENTE"].count())
     mostrarDadosMes(st, dadosUnidade)
