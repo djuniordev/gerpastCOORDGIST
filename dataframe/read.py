@@ -1,8 +1,8 @@
 import pandas as pd
 from .dataframe import configDataframeAcidentes, configDataframeTratamento
 from dataframe import meses
-from controllers.veiculo import mostrarDadosVeiculo
-from controllers.sexo import mostrarDadosSexo
+from controllers.veiculo import mostrarDadosVeiculo,dadosDetalhadosVeiculos
+from controllers.sexo import mostrarDadosSexo,sexoDetalhado
 from controllers.idade import mostrarDadosIdade
 from controllers.municipio import mostrarDadosMunicipio
 from controllers.internacao import mostrarDadosInternacao
@@ -47,11 +47,15 @@ def mostrarDadosAcidente(df):
 
     with col3:
         veículo_counts = dadosUnidade["VEÍCULOS ENVOLVIDOS"].value_counts()
-
+    
         # Determinar o sexo com o maior número de acidentes
         veiculo_max = veículo_counts.idxmax()
         st.metric(label="Veículo c/ mais acidentes", value=veiculo_max)
-
+    with st.expander("Dados Detalhados"):
+        st.write(''' Tabela de Dados ''')
+        st.dataframe(dadosUnidade, use_container_width=True, hide_index=True)
+        sexoDetalhado(st, dadosUnidade)
+        dadosDetalhadosVeiculos(st, dadosUnidade)
     #with col4:
         #st.metric(label="Total Municípios", value=dadosUnidade["MUNICÍPIO ACIDENTE"].count())
     mostrarDadosMes(st, dadosUnidade)

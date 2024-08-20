@@ -1,5 +1,6 @@
 import plotly.express as px
 import pandas as pd
+from repositories.veiculo import countVeiculo
 
 def mostrarDadosVeiculo(st, dadosUnidade):
 
@@ -28,3 +29,13 @@ def mostrarDadosVeiculo(st, dadosUnidade):
     # st.write(f"Caminhonete: {infoVeiculo['TotalCaminhonete']}")
     # st.write(f"Motocicleta: {infoVeiculo['TotalMotocicleta']}")
     # st.write(f"Carro: {infoVeiculo['TotalCarro']}")
+def dadosDetalhadosVeiculos(st, dadosUnidade):
+     infoVeiculo = countVeiculo(dadosUnidade)
+     st.header("Veículos:")
+     st.write(f"Total: {infoVeiculo['TotalVeiculoUnidade']}")
+     st.write(f"Sequência vazia: {infoVeiculo['NumeroSequenciaVazia']}")
+     st.write(f"Bicicleta: {infoVeiculo['TotalBicicleta']}")
+     st.write(f"Caminhão: {infoVeiculo['TotalCaminhao']}")
+     st.write(f"Caminhonete: {infoVeiculo['TotalCaminhonete']}")
+     st.write(f"Motocicleta: {infoVeiculo['TotalMotocicleta']}")
+     st.write(f"Carro: {infoVeiculo['TotalCarro']}")
