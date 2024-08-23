@@ -1,5 +1,5 @@
 import pandas as pd
-from .dataframe import configDataframeAcidentes, configDataframeTratamento
+from .dataframe import configDataframeAcidentes, configDataframeTratamento, configDataframeAcidentesTratamento
 from dataframe import meses
 from controllers.veiculo import mostrarDadosVeiculo,dadosDetalhadosVeiculos
 from controllers.sexo import mostrarDadosSexo,sexoDetalhado
@@ -10,8 +10,9 @@ from controllers.semana import mostrarDadosSemana
 from controllers.mes import mostrarDadosMes
 from controllers.hora import mostrarDadosHora
 
-from filterpage.filterHomepage import filterDataframeAcidentes, filterDataframeTratamento
+from filterpage.filterHomepage import filterDataframeAcidentes, filterDataframeTratamento, filterDataframeAcidentesTratamento
 import streamlit as st
+
 def read(planilha, tipo):
 
     df = pd.read_excel(planilha)
@@ -21,6 +22,16 @@ def read(planilha, tipo):
     if tipo == "Tratamento":
         df = configDataframeTratamento(df)
 
+    return df
+
+def readPlanilhas(planilha1, planilha2):
+    df1 = pd.read_excel(planilha1)
+    
+    df2 = pd.read_excel(planilha2)
+
+    # Merge dos DataFrames pela coluna 'CPF'
+    df = pd.merge(df1, df2[['CARTÃO SUS_8', 'INÍCIO INTERNAÇÃO_7']], on='CARTÃO SUS_8', how='left')  # 'inner' para o merge interno, 'outer' para o externo
+    df = configDataframeAcidentesTratamento(df)
     return df
 
 def mostrarDadosAcidente(df):
@@ -86,6 +97,11 @@ def mostrarDadosAcidente(df):
 
     mostrarDadosSemana(st, dadosUnidade)
     mostrarDadosHora(st, dadosUnidade)
+
+def mostrarDadosAcidentesTratamento(df):
+    dadosUnidade = filterDataframeAcidentesTratamento(df, meses)
+    st.dataframe(dadosUnidade)
+    mostrarDadosVeiculo(st, dadosUnidade)
 
 def mostrarDadosTratamento(df):
     # Pegando os filtros selecionados pelo usuário
