@@ -1,7 +1,10 @@
 import streamlit as st
 from dataframe.read import mostrarDadosTratamento, read
+from pages import configPage
 
 def tratamentoPage():
+    configPage()
+
     st.sidebar.title("Importar planilha de Dados do Tratamento")
 
     planilhaDeTratamento = st.sidebar.file_uploader("Clique aqui para importar dados do tratamento")
