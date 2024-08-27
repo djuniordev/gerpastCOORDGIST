@@ -10,8 +10,11 @@ def tratamentoPage():
     planilhaDeTratamento = st.sidebar.file_uploader("Clique aqui para importar dados do tratamento")
     if planilhaDeTratamento is not None:
         with st.spinner("Aguardando..."):
-            df_tratamento = read(planilhaDeTratamento, "Tratamento")
-            mostrarDadosTratamento(df_tratamento)
+            try:
+                df_tratamento = read(planilhaDeTratamento, "Tratamento")
+                mostrarDadosTratamento(df_tratamento)
+            except Exception:
+                st.warning("Ocorreu um erro durante o processamento.")
 
     if planilhaDeTratamento is None:
         st.write("Por favor, faça o upload de um arquivo.")

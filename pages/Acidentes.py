@@ -11,8 +11,11 @@ def acidentesPage():
     # Processar as planilhas
     if planilhaDeAcidentes is not None:
         with st.spinner("Aguardando..."):
-            df_acidentes = read(planilhaDeAcidentes, "Acidentes")
-            mostrarDadosAcidente(df_acidentes)
+            try:
+                df_acidentes = read(planilhaDeAcidentes, "Acidentes")
+                mostrarDadosAcidente(df_acidentes)
+            except Exception:
+                st.warning("Ocorreu um erro durante o processamento.")
 
     # Mensagem caso nenhum arquivo seja carregado
     if planilhaDeAcidentes is None:
