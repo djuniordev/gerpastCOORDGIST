@@ -51,10 +51,20 @@ def mostrarDadosAcidente(df):
     with col2:
         sexo_counts = dadosUnidade["SEXO"].value_counts()
 
-        # Determinar o sexo com o maior número de acidentes
-        sexo_max = sexo_counts.idxmax()
+        # Determinar o número máximo de acidentes
+        max_count = sexo_counts.max()
 
-        st.metric(label="Sexo c/ mais acidentes", value=f"{sexo_max}")
+        # Obter todos os sexos com o número máximo de acidentes
+        sexos_max = sexo_counts[sexo_counts == max_count].index.tolist()
+
+        if len(sexos_max) > 1:
+            # Se houver mais de um sexo com a mesma quantidade máxima de acidentes
+            message = "Igual"
+        else:
+            # Caso contrário, exibe o gênero com o maior número de acidentes
+            message = sexos_max[0]
+
+        st.metric(label="Sexo c/ mais acidentes", value=message)
 
     with col3:
         veículo_counts = dadosUnidade["VEÍCULOS ENVOLVIDOS"].value_counts()
