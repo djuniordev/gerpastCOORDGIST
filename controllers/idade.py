@@ -32,7 +32,12 @@ def dadosIdadeDetalhados(st, dadosUnidade):
      infoIdade = countIdade(dadosUnidade)
      st.header("Idade:")
      st.write(f"Total: {infoIdade["TotalIdadeUnidade"]}")
-     st.write(f"Sequência vazia: {infoIdade["NumeroSequenciaVazia"]}")
+
+     mostrar_tudo2 = st.checkbox("Mostrar sequência vazia idade")
+
+     if mostrar_tudo2:
+         st.write(f"Sequência vazia: {infoIdade['NumeroSequenciaVazia']}")
+
      st.write(f"Menos de 10 anos: {infoIdade["Total -10"]}")
      st.write(f"10 a 19 anos: {infoIdade["Total 10 a 19"]}")
      st.write(f"20 a 29 anos: {infoIdade["Total 20 a 29"]}")

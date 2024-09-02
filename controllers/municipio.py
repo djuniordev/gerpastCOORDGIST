@@ -26,8 +26,11 @@ def dadosDetalhadosMunicipio(st, dadosUnidade):
         # Cabeçalho e informações principais
         st.header("Município:")
         st.write(f"Total: {infoMunicipio['TotalMunicipioAcidente']}")
-        st.write(f"Sequência vazia: {infoMunicipio['NumeroSequenciaVazia']}")
 
+        mostrar_tudo3 = st.checkbox("Mostrar sequência vazia município")
+
+        if mostrar_tudo3:
+                st.write(f"Sequência vazia: {infoMunicipio['NumeroSequenciaVazia']}")
         # Obter o dicionário de contagem de municípios
         contagemMunicipio = infoMunicipio['ContagemMunicipio']
 

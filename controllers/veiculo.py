@@ -33,7 +33,12 @@ def dadosDetalhadosVeiculos(st, dadosUnidade):
      infoVeiculo = countVeiculo(dadosUnidade)
      st.header("Veículos:")
      st.write(f"Total: {infoVeiculo['TotalVeiculoUnidade']}")
-     st.write(f"Sequência vazia: {infoVeiculo['NumeroSequenciaVazia']}")
+
+     mostrar_tudo1 = st.checkbox("Mostrar sequência vazia veículo")
+
+     if mostrar_tudo1:
+         st.write(f"Sequência vazia: {infoVeiculo['NumeroSequenciaVazia']}")
+
      st.write(f"Bicicleta: {infoVeiculo['TotalBicicleta']}")
      st.write(f"Caminhão: {infoVeiculo['TotalCaminhao']}")
      st.write(f"Caminhonete: {infoVeiculo['TotalCaminhonete']}")

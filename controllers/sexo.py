@@ -23,12 +23,24 @@ def mostrarDadosSexo(st, dadosUnidade):
     #st.write(f"Masculino: {infoSexo["TotalMasculino"]}")
     #st.write(f"Feminino: {infoSexo["TotalFeminino"]}")
 def sexoDetalhado(st, dadosUnidade):
+    # Contar os dados
     infoSexo = countSexo(dadosUnidade)
+
+    # Cabeçalho
     st.header("Sexo:")
-    st.write(f"Total: {infoSexo["TotalSexoUnidade"]}")
-    st.write(f"Sequência vazia: {infoSexo['NumeroSequenciaVazia']}")
-    st.write(f"Masculino: {infoSexo["TotalMasculino"]}")
-    st.write(f"Feminino: {infoSexo["TotalFeminino"]}")
+
+    # Exibir total
+    st.write(f"Total: {infoSexo['TotalSexoUnidade']}")
+
+    mostrar_tudo = st.checkbox("Mostrar sequência vazia")
+
+    if mostrar_tudo:
+        st.write(f"Sequência vazia: {infoSexo['NumeroSequenciaVazia']}")
+
+    # Exibir informações de masculino e feminino
+    st.write(f"Masculino: {infoSexo['TotalMasculino']}")
+    st.write(f"Feminino: {infoSexo['TotalFeminino']}")
+
 
 
 
